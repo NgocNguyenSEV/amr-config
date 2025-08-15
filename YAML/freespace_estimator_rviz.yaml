@@ -1,0 +1,9 @@
+namespace: 'freespace_estimator'
+preset: 'level_1'
+level_0:
+  module_list: []
+level_1:
+  module_list: ['map_manager_rviz', 'obstacle_extractor_rviz']
+level_2:
+  module_list: ['carpet_detector_rviz', 'depth_analyzer_rviz', 'lidar_analyzer_rviz',
+    'map_manager_rviz', 'obstacle_extractor_rviz']

@@ -1,0 +1,161 @@
+/**:
+  ros__parameters:
+    boundary_builder:
+      occupancy_inflation_range: 0.25
+    boundary_manager:
+      update_timer_msec: 100
+      safety_margin:
+        entry_generation: 0.05
+        entry_selection: 0.0
+      timeout:
+        activate_action: 10.0
+      visualization:
+        distance_map:
+          use: false
+          update_tick_period: 30
+    coverage_manager:
+      update_timer_msec: 100
+      pose_queue_duration: 1.0
+      occupancy_threshold: 200
+      mark:
+        radius: 0.175
+        resolution: 0.025
+      timeout:
+        pull_target_region_id_action: 5.0
+        input_data: 5.0
+    coverage_manager_rviz:
+      update_timer_msec: 100
+    line_builder:
+      update_timer_msec: 100
+      polygonal_modeling:
+        use: true
+        min_area: 1.0
+        max_simplification_tolerance: 0.1
+      line_optimization:
+        num_iterations: 3
+      line_interval: 0.2
+      activate_action_timeout: 10.0
+    line_manager:
+      update_timer_msec: 100
+      line_resolution: 0.05
+      subsegment_generation:
+        safety_margin: 0.1
+        min_subsegment_size: 4
+      subsegment_selection:
+        safety_margin: 0.0
+        choose_farthest: true
+        max_transition_distance: 1.0
+      timeout:
+        robot_pose: 1.0
+        activate_action: 10.0
+      visualization:
+        subsegment:
+          use: false
+        distance_map:
+          use: false
+          update_tick_period: 30
+    line_follower:
+      update_timer_msec: 100
+      motion:
+        linear:
+          max_speed: 0.3
+          acceleration: 0.3
+          min_deceleration: 0.1
+          max_deceleration: 0.4
+          zero_speed: 0.001
+        angular:
+          max_speed: 1.2
+          acceleration: 2.0
+          deceleration: 3.0
+          zero_speed: 0.01
+      collision_detection_margin:
+        x: 0.05
+        y: 0.01
+      line_change:
+        min_allowable_margin: -0.2
+      point_following:
+        covering_gain: 1.5
+        rotating_time_constant: 0.2
+        error_tolerance:
+          distance: 0.04
+          heading: 0.1
+      boundary_following:
+        desired_side_margin: 0.02
+        lap_angle_error_tolerance: 0.2
+        termination:
+          max_half_laps: 2
+          max_elapsed_time: 1000.0
+          max_trajectory_length: 10.0
+        nominal_speed:
+          linear: 0.15
+          angular: 0.78
+        error_gain:
+          distance: 2.3
+          heading: 1.8
+        boundary_search:
+          left_side: false
+          min_range_offset: 0.0
+          closest_point:
+            max_range_offset: 0.175
+            forward_angle: 0.52
+            backward_angle: 0.26
+          dominant_heading:
+            max_range_offset: 0.075
+            forward_angle: 0.78
+            backward_angle: 0.0
+            min_num_points: 4
+      u_turning:
+        use: false
+        max_next_line_shift: 0.1
+        early_start_margin: 0.1
+        turn_radius_margin: 0.0
+        nominal_linear_speed: 0.15
+        heading_error_tolerance: 0.2
+    boundary_follower:
+      update_timer_msec: 100
+      robot_size_reducing_margin: 0.02
+      collision:
+        check_time: 5.0
+        max_forward_clearance: 1.0
+      safe_margin:
+        side: 0.02
+        front: 0.04
+      search_region:
+        right_side: true
+        boundary:
+          forward_angle: 1.047
+          backward_angle: 0.0
+          max_x: 0.5
+          max_y: 0.25
+          min_length: 0.05
+          min_num_points: 6
+        entry_point:
+          max_distance: 0.5
+        logical_scan:
+          max_distance: 1.5
+      twist:
+        limit:
+          covering:
+            linear: 0.3
+            angular: 1.571
+            lateral_acceleration: 0.524
+            min_linear: 0.05
+          exploring:
+            linear: 0.1
+            angular: 1.571
+          rotating:
+            angular: 0.524
+        gain:
+          linear: 1.5
+          angular: 2.0
+          braking: 4.0
+        acceleration:
+          linear: 0.5
+          angular: 2.5
+        deceleration:
+          linear: 1.4
+      clear_condition:
+        heading_alignment: 0.524
+      data_timeout: 2.0
+    boundary_follower_rviz:
+      update_timer_msec: 100

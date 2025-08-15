@@ -1,0 +1,19 @@
+/**:
+  ros__parameters:
+    exploration_planner:
+      occupied_threshold: 50
+      occupancy_inflation_range: 0.55  # [m]
+      min_frontier_point_count: 40
+      frontier_distance_threshold: 2.0  # [m]
+      goal_relocation:
+        boundary: 1.0  # [m]
+        freespace_range: 0.6  # [m]
+        min_distance: 0.5  # [m]
+      identified_frontier:
+        explored_cell_ratio: 0.5
+        explored_check_range: 2.0  # [m]
+        explorable_cell_ratio: 0.5
+        uncertainty_range: 0.2  # [m]
+      outdated_input_time_threshold: 1.0  # [s]
+~                                                
+"expression_planner.yaml" 17L, 547B

@@ -1,0 +1,498 @@
+dcu_node:
+  ros__parameters:
+    baud_rate: 115200
+    serial_port: "/dev/raspberry"
+    dcu_timeout: 3.0 #second
+    dcu_type: "hjb"
+    drive_type: "diff" #diff, mecanum
+    has_tape_agv: True
+    heartbeat_period_ms: 20
+
+teleop_keyboard:
+  ros__parameters:
+    initial_mode: "auto" # select manual/auto
+    maximum_linear_velocity: 0.3
+    maximum_lateral_velocity: 0.5
+    maximum_angular_velocity: 0.5
+    step_linear_velocity: 0.05
+    step_lateral_velocity: 0.05
+    step_angular_velocity: 0.05
+
+# For QR localizatioin in UAV lab only
+lc_qr_reader_node:
+  ros__parameters:
+    generate_qr_map: False
+    visual_debug: False
+    # qr_raw_data_json: /home/amr/Projects/ROS2-AMR/src/amr_navigation/amr_qr_localization/amr_qr/config/qr_raw_data_2_2.json
+    # qr_map_json: /home/amr/Projects/ROS2-AMR/src/amr_navigation/amr_qr_localization/amr_qr/config/agv_map_uav.json
+    # qr_map_json: /home/amr/Projects/ROS2-AMR/src/amr_navigation/amr_qr_localization/amr_qr/config/gtr_map.json
+    # qr_image_dir: /home/amr/Projects/ROS2-AMR/qrImgs/
+    # qr_raw_data_json: /root/Projects/ROS2-AMR/src/amr_navigation/amr_qr_localization/amr_qr/config/qr_raw_data_2_2.json
+    # qr_map_json: /root/Projects/ROS2-AMR/src/amr_navigation/amr_qr_localization/amr_qr/config/agv_map_uav.json
+    # qr_image_dir: /root/Projects/ROS2-AMR/qrImgs/
+    qr_raw_data_json: /usr/ros2/foxy/share/amr_navigation/amr_qr_localization/amr_qr/config/qr_raw_data_2_2.json
+    qr_map_json: /usr/ros2/foxy/share/amr_navigation/amr_qr_localization/amr_qr/config/gtr_map.json
+    qr_image_dir: /home/amr/Projects/ROS2-AMR/qrImgs/
+    qr_map_amr_version_th: 9000
+    std_meas_range: [0.0006, 0.00013]
+    delt: 0.01
+    std_meas: 0.00015
+    # var_meas_range: [0.0012, 0.00026]
+    # 2023.06.15
+    sel_pyzbar_T_or_pyboof_F: True
+    cam_position: "bottom"
+    marker_length_threshold_pixel: 50
+    marker_down_up_length_ratio: 1.0
+
+# # For QR localization of AMR with 2X2 QR map data genration in the future
+# lc_qr_reader_node:
+#   ros__parameters:
+#     working_location: All
+#     generate_qr_map: True
+#     visual_debug: True
+#     camera_info_url: /home/amr/Projects/ROS2-AMR/src/amr_driver/camera_applications/v4l2_camera/config/camera.yaml
+#     qr_raw_data_json: /home/amr/Projects/ROS2-AMR/src/amr_navigation/amr_qr_localization/amr_qr/config/qr_raw_data_2_2.json
+#     qr_map_json: /home/amr/Projects/ROS2-AMR/src/amr_navigation/amr_qr_localization/amr_qr/config/qr_amr_map.json
+#     qr_image_dir: /home/amr/Projects/ROS2-AMR/qrImgs/
+#     qr_map_amr_version_th: 9000
+
+controller_manager:
+  ros__parameters:
+    update_rate: 50 # Hz
+
+    amr_diff_drive_controller:
+      type: amr_diff_drive_controller/DiffDriveController
+
+    amr_base_controller:
+      type: amr_base_controller/BaseController
+
+    amr_battery_controller:
+      type: amr_battery_controller/BatteryController
+
+    amr_gpio_controller:
+      type: amr_gpio_controller/GPIOController
+
+    amr_state_controller:
+      type: amr_state_controller/StateController
+
+    amr_turn_table_lift_controller:
+      type: amr_turn_table_lift_controller/TurnTableLiftController
+
+    amr_base_lift_controller:
+      type: amr_base_lift_controller/BaseLiftController
+
+    amr_tape_agv_controller:
+      type: amr_tape_agv_controller/TapeAgvController
+    # amr_rf_board_controller:
+    #   type: amr_rf_board_controller/RFBoardController
+
+    joint_state_controller:
+      type: joint_state_controller/JointStateController
+
+amr_base_controller:
+  ros__parameters:
+    button_name: button_joint
+    tower_light_name: lamp_joint
+    dcu_name: dcu_joint
+    disable_motor_switch_error: True
+
+amr_battery_controller:
+  ros__parameters:
+    battery_name: battery_joint
+    low_battery_percent: 20.0 # %
+    max_voltage: 27.0
+    min_voltage: 22.5
+    use_bms: false
+
+amr_gpio_controller:
+  ros__parameters:
+    gpio_name: gpio_joint
+
+amr_state_controller:
+  ros__parameters:
+    simulation: false
+    disabling_motor_switch_loose_pose: false
+
+amr_diff_drive_controller:
+  ros__parameters:
+    left_wheel_names: ["wheel_left_joint"]
+    right_wheel_names: ["wheel_right_joint"]
+
+    wheel_separation: 0.664
+    wheels_per_side: 1 # actually 2, but both are controlled by 1 signal
+    wheel_radius: 0.100
+
+    wheel_separation_multiplier: 1.0
+    left_wheel_radius_multiplier: 1.0
+    right_wheel_radius_multiplier: 1.0
+
+    enable_odom: true
+    odom_frame_id: odom
+    base_frame_id: base_footprint
+    pose_covariance_diagonal: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    twist_covariance_diagonal: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+
+    open_loop: false
+    enable_odom_tf: false
+
+    cmd_vel_timeout: 0.5 # seconds
+    publish_limited_velocity: true
+    velocity_rolling_window_size: 10
+    use_stamped_vel: true
+
+    linear.x.has_velocity_limits: true
+    linear.x.has_acceleration_limits: true
+    linear.x.has_jerk_limits: false
+    linear.x.max_velocity: 1.0
+    linear.x.min_velocity: -1.0
+    linear.x.max_acceleration: 1.0
+    linear.x.max_jerk: 0.0
+    linear.x.min_jerk: 0.0
+
+    angular.z.has_velocity_limits: true
+    angular.z.has_acceleration_limits: true
+    angular.z.has_jerk_limits: false
+    angular.z.max_velocity: 1.8
+    angular.z.min_velocity: -1.8
+    angular.z.max_acceleration: 5.0
+    angular.z.min_acceleration: -5.0
+    angular.z.max_jerk: 0.0
+    angular.z.min_jerk: 0.0
+
+    use_warning_area: true
+    minimum_warning_area_ratio: 0.8
+
+    use_minimum_cmd_th: true
+    minimum_linear_cmd_th: 0.05
+    minimum_angular_cmd_th: 0.05
+
+amr_turn_table_lift_controller:
+  ros__parameters:
+    turn_table_lift_name: turn_table_lift_joint
+    lift_up_velocity: 10 # mm/s
+    lift_down_velocity: 10 # mm/s
+    turn_rpm_set_use: false 
+    turn_rpm_velocity: 20 #max 250rpm
+    gear_ratio: 4.0
+    motor_ppr: 3508
+    
+    shelf_size: "[ [0.50, 0.65], [-0.60, 0.65], [-0.60, -0.65], [0.50, -0.65] ]"
+
+amr_base_lift_controller:
+  ros__parameters:
+    base_lift_name: base_lift_joint
+    shelf_size: "[ [0.50, 0.65], [-0.60, 0.65], [-0.60, -0.65], [0.50, -0.65] ]"
+
+amr_tape_agv_controller:
+  ros__parameters:
+    tape_agv_name: tape_agv_joint
+# amr_rf_board_controller:
+#   ros__parameters:
+#     rf_board_name: rf_board_joint
+
+robot_state_publisher:
+  ros__parameters:
+    use_sim_time: False
+
+bot_amr_behavior_tree:
+  ros__parameters:
+    default_bt_xml_filename: amr_bt.xml
+    enable_groot_monitoring: False
+    groot_zmq_publisher_port: 1666
+    groot_zmq_server_port: 1667
+    update_timer_msec: 100 # [msec]
+    force_correct_initial_pose: True
+
+    enforce_loaded_footprint: True
+    robot_footprint:
+      width: 0.771 # [m]
+      length: 1.614 # [m]
+      extrinsic_x: 0.0 # [m]
+      extrinsic_y: 0.0 # [m]
+    pre_docking_footprint:
+      width: 0.771 # [m]
+      length: 1.614 # [m]
+      extrinsic_x: 0.0 # [m]
+      extrinsic_y: 0.0 # [m]
+    docking_footprint:
+      width: 0.571 # [m]
+      length: 1.614 # [m]
+      extrinsic_x: 0.0 # [m]
+      extrinsic_y: 0.0 # [m]
+    side_docking_footprint:
+      width: 0.771 # [m]
+      length: 1.614 # [m]
+      extrinsic_x: 0.0 # [m]
+      extrinsic_y: 0.0 # [m]
+
+    pre_docking_marker_array_range: 0.5 # [m]
+    enable_docking_goal_heading: True
+    general_tolerance:
+      distance: 0.10 # [m]
+      heading: 5.0 # [deg]
+    undocking_tolerance:
+      distance: 0.05 # [m]
+      heading: 2.0 # [deg]
+
+    gpio_input_data: [0, 0, 0, 0, 0, 0, 0, 0]
+    gpio_output_data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    has_tape_agv: True
+    enable_guide_sensor_switch: False
+    tape_read_min_max_threshold: 7
+    min_tape_read_count: 3
+
+    module_initialization_timeout: 60.0 # [sec]
+    module_restart_timeout: 20.0 # [sec]
+    charging_timeout: 30.0 # [sec]
+    turn_table_lift_timeout: 10.0 # [sec]
+    base_lift_timeout: 20.0 # [sec] N x base_lift_retry_timeout
+    base_lift_retry_timeout: 10.0 # [sec]
+    gpio_comm_timeout: 30.0 # [sec]
+
+    evasive_mode:
+      pre_decelerator:
+        enable: True
+        min_velocity: 0.5 # [m/s]
+      path_planner:
+        margin: 0.05 #[m]
+      forward_planner:
+        forward_safety_distance: 0.4 # [m]
+      rotation_planner:
+        min_allowable_clearance: 0.4 # [m]
+      goal_generator:
+        lookahead_distance_max: 3.0 # [m]
+        lookahead_distance_min: 0.5 # [m]
+        lookahead_distance_adaptive_pull_ratio: 3.0
+      lidar_localizer:
+        is_omnidirectional_robot: False
+    stop_and_go_mode:
+      pre_decelerator:
+        enable: True
+        min_velocity: 0.0 # [m/s]
+      path_planner:
+        margin: -1.0 #[m]
+      forward_planner:
+        forward_safety_distance: 0.4 # [m]
+      rotation_planner:
+        min_allowable_clearance: 0.4 # [m]
+      goal_generator:
+        lookahead_distance_max: 3.0 # [m]
+        lookahead_distance_min: 0.5 # [m]
+        lookahead_distance_adaptive_pull_ratio: 3.0
+      lidar_localizer:
+        is_omnidirectional_robot: False
+    pre_docking_mode:
+      pre_decelerator:
+        enable: True
+        min_velocity: 0.0 # [m/s]
+      path_planner:
+        margin: -1.0 #[m]
+      forward_planner:
+        forward_safety_distance: 0.4 # [m]
+      rotation_planner:
+        min_allowable_clearance: 0.4 # [m]
+      goal_generator:
+        lookahead_distance_max: 3.0 # [m]
+        lookahead_distance_min: 0.5 # [m]
+        lookahead_distance_adaptive_pull_ratio: 3.0
+      lidar_localizer:
+        is_omnidirectional_robot: False
+    docking_mode:
+      pre_decelerator:
+        enable: True
+        min_velocity: 0.0 # [m/s]
+      path_planner:
+        margin: -1.0 #[m]
+      forward_planner:
+        forward_safety_distance: 0.4 # [m]
+      rotation_planner:
+        min_allowable_clearance: 0.4 # [m]
+      goal_generator:
+        lookahead_distance_max: 3.0 # [m]
+        lookahead_distance_min: 0.5 # [m]
+        lookahead_distance_adaptive_pull_ratio: 3.0
+      lidar_localizer:
+        is_omnidirectional_robot: False
+    side_docking_mode:
+      pre_decelerator:
+        enable: True
+        min_velocity: 0.0 # [m/s]
+      path_planner:
+        margin: -1.0 # [m]
+      forward_planner:
+        forward_safety_distance: 0.1 # [m]
+      rotation_planner:
+        min_allowable_clearance: 0.1 # [m]
+      goal_generator:
+        lookahead_distance_max: 3.0 # [m]
+        lookahead_distance_min: 0.5 # [m]
+        lookahead_distance_adaptive_pull_ratio: 3.0
+      lidar_localizer:
+        is_omnidirectional_robot: True
+
+    proc_check_list:
+      [
+        "bot_amr_acs_manager",
+        "bot_amr_controllers",
+        "bot_amr_map_manager",
+        "bot_amr_mission_manager",
+        "bot_amr_pose_msf",
+        "bot_amr_qr_localizer",
+        "bot_amr_controllers",
+        "bot_jass_behavior_planner",
+        "bot_sensor_imu_amr",
+        "bot_sensor_odometer",
+      ]
+
+mission_manager:
+  ros__parameters:
+    use_linear_submission: True
+    use_acs_traffic_control: True
+    use_auto_permission: False
+    dist_acs_request: 5.5 # [m]
+    dist_acs_permission_wait: 3.0 # [m]
+    dist_node_occupied: 2.5 # [m]
+    dist_pass_at_waypoint: 2.5 #[m]
+    vel_additional_first_submission: 0.3
+    use_saved_map: False
+    use_map_topic: True
+    use_obstacle_avoidance_control: False
+    dist_obstacle_avoidance: 1.0 #[m]
+    angle_obstacle_avoidance: 90.0 #[deg]
+    # map_path: /home/amr/Projects/ROS2-AMR/src/amr_brinup/map/sites/sesk/k2
+    map_path: /usr/ros2/foxy/share/amr_brinup/map/sites/gtc
+    update_predocking_direction: True # True for backward docking
+    update_node_direction: True # False for mecanum
+    save_docking_error: False
+    dist_approaching_node: 0.4 #[m]
+    dist_fake_node: 0.1 #[m]
+    use_error_1105: True
+# map_manager:
+#   ros__parameters:
+#     road_map_path: /home/amr/Projects/ROS2-AMR/amr_map.bin
+
+pose_msf:
+  ros__parameters:
+    pose_msf_simulation: false # if true, amr_pose_msf can be executed independently. otherwise experiments
+    verbose: false
+    save_logging_data: false # for simulation of bag files
+
+    # prefix of file name for the saved data
+
+    saved_file_name_prefix: "220525b" # best parameters 1
+
+    saved_file_path: "./src/amr_navigation/amr_pose_msf/data/" # path to saved files
+
+    # to adjust mcl dato to be aligned with QR data (qr - mcl)
+    mcl_offset_x: 0. #102000. before 220526
+    mcl_offset_y: 0. #112000. before 220526
+    mcl_offset_theta: 0. # 0.
+
+    imu_topic: /bot_sensor/imu_base/imu
+    odom_topic: /odom
+    qr_topic: /qr_cam_pose_in_world
+    mcl_topic: /estimated_pose
+    msf_topic: ~/msf_pose # /pose_msf/msf_pose
+    #use_mcl_topic: ~/use_mcl # /pose_msf/use_mcl
+    localizer_mode_topic_: /localizer_mode
+
+    # msf reset parameters 2206 (false in QR AGV)
+    reset_imu_to_msf: false # reset imu yaw to msf yaw rather than QR yaw (in case poor QR yaw)
+    reset_mcl_to_msf: false # reset mcl yaw,x,y to msf yaw,x,y rather than QR yaw,x,y (poor QR)
+
+    use_mcl_meas_up: false # to use measurement update of mcl data. this is only default (topic )
+    sigma_mcl_t: 5. #deg temporary
+    sigma_mcl_xy: 100. #mm  temporary
+    enable_mah_outlier_rejection_mcl_t: false # temporary
+    enable_mah_outlier_rejection_mcl_xy: false # temporary
+    mah_threshold_mcl_t: 10. #temporary
+    mah_threshold_mcl_xy: 10. #temporary
+    delay_mcl: 0. #temporary
+
+    sigma_QRCode: 1. # measurement noise of QR code reading in deg
+    sigma_qr_forward: 10. # measurement noise of qr code x(forward)position in mm
+    sigma_qr_lateral: 10. # measurement noise of qr code x(lateral)position in mm
+
+    sigma_n_forward: 500.
+    sigma_n_lateral: 250.
+    sigma_n_v: 10.
+
+    sigma_IMU: 0.25
+    sigma_odom: 5.
+    sigma_n_theta: 10.
+    sigma_n_bias: 0.1
+    sigma_theta: 10.
+    sigma_bias: 0.1
+    enable_mah_outlier_rejection_qr_f: false
+    enable_mah_outlier_rejection_qr_l: false
+    enable_mah_outlier_rejection_qr_t: false
+    enable_mah_outlier_rejection_imu: false
+    enable_mah_outlier_rejection_odom: false
+    mah_threshold_qr_f: 20.
+    mah_threshold_qr_l: 10.
+    mah_threshold_qr_t: 4.
+    mah_threshold_imu: 10.
+    mah_threshold_odom: 10.
+    delay_qr: 0.000
+    delay_imu: 0.000
+    delay_odom: 0.000
+    use_imu_offset: true
+    use_avg_nbhd_imu_offset: true
+    npts_imu_offset: 3
+    use_relative_imu: false
+    use_relative_odom: true
+
+speaker_manager:
+  ros__parameters:
+    use_speaker: True
+    language: kr # kr: korean, en: english
+    verbose: False
+
+extrinsic_calibration_node:
+  ros__parameters:
+    joint_name: base_camera_bottom_joint
+    visual_debug_extrinsic_cal: False     # [True]: showing camera image sequence and overlaid axes, [False]: now showing them
+    checker_rows: 7                      # The number of squares in vertical direction
+    checker_cols: 10                     # The number of squares in horizontal direction
+    checker_width: 0.01                  # The side length of a square in a checker board. Unit: [m], e.g., 0.02 indicates 0.02[m] = 2[cm]
+    Twb_: [0.0, 0.0, 0.0]                # Twb_[2] indicates the height of robot body center from the floor. Unit: [m] e.g., 0.1 indicates 0.1[m] = 10[cm]
+    Rwb: [0.0, 0.0, 1.57079632675]       # Predefined rotatin vector between world coordinate and robot body coordinate. Unit: [rad] i.e., Rwb[2] = 1.5707 indicates the rotation of 90 deg centered on Z-axis.
+
+bot_amr_safety_fields:
+  ros__parameters:
+    use_sim_time: True
+    footprint_topic: "footprint"
+    footprint: "[[0.811, 0.385],[-0.803, 0.385],[-0.803, -0.385],[0.811, -0.385]]"
+    footprint_padding: 0.0
+    robot_radius: 0.4
+    safety_margin_front: 0.4
+    safety_margin_back: 0.0
+    safety_margin_left: 0.1
+    safety_margin_right: 0.1
+    safety_margin_rotation: 0.1
+    tape_guided_safety_margin_front: 0.3
+    tape_guided_safety_margin_back: 0.3
+    distance_warning: 3.0
+    min_speed_warning: 0.0
+    global_frame_id: base_link
+    robot_base_frame_id: base_link
+    odom_frame_id: odom
+    transform_tolerance: 0.1
+    use_rear_lidar: true
+    front_lidar_frame_id: lidar_front
+    rear_lidar_frame_id: lidar_rear
+    observation_sources: scan_front #scan_rear
+    use_sor: true
+    data_type: obstacle_points
+    scan_front:
+      topic: /jass/freespace_estimator/freespace_estimator_3d/obstacle_points
+      max_obstacle_height: 2.0
+      data_type: "PointCloud2"
+      inf_is_valid: true
+      sensor_frame: "[[0.560, 0.0, 0.135 0.0, 0.0, 0.0]]" # [ x (m), y (m), z (m), roll (rad), pitch (rad), yaw (rad)]
+    # scan_rear:
+    #   topic: /bot_sensor/lidar_rear/laser_scan
+    #   max_obstacle_height: 2.0
+    #   data_type: "LaserScan"
+    #   inf_is_valid: true
+    #   sensor_frame: "[[-0.560, 0.0, 0.135 0.0, 0.0, 3.141592]]" # [ x (m), y (m), z (m), roll (rad), pitch (rad), yaw (rad)]

@@ -1,0 +1,8 @@
+/**:
+  ros__parameters:
+    turn_planner:
+      update_timer_msec: 100  # [msec]
+      default_turn_velocity: 1.0
+      arrival_tolerance: 0.05
+      zero_velocity_threshold: 0.05
+      robot_time_constant: 0.2

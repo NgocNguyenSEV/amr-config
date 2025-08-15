@@ -1,0 +1,44 @@
+/**:
+  ros__parameters:
+    doorway_detector_pilot:
+      test_number: 2
+    doorway_detector:
+      update_timer_msec: 100
+      external_doorway_setting_allowed: true
+      voronoi:
+        unknown_cell_considered_obstacle: false
+        occupancy_threshold: 50
+        unknown_threshold: 0
+      filter_use:
+        center_distance_filter: true
+        side_wall_filter: true
+        connected_component_filter: true
+      debug:
+        publish_cell_state_map: true
+        publish_queue_state_map: true
+        publish_raw_label_map: true
+        publish_merged_label_map: true
+        distance_map: true
+      doorway_fixer:
+        external_doorway_setting_allowed: false
+        side_margin: 0.2
+        threshold_distance_robot_to_doorway: 0.1
+        threshold_distance_between_doorways: 0.5
+    map_builder:
+      update_timer_msec: 100
+      occupied_cell_inflation_size: 0.2
+      occupancy_threshold: 200
+      update_log_size: 5
+      max_region_id: 15
+      min_region_area: 2.5
+      min_update_region_area: 2.5
+      dominant_angle:
+        kernel_dimension: 15
+        mean_bias_limit: 3.0
+        bin_angle_resolution: 0.001745329
+        number_sample_threshold: 3
+        score_threshold: 0.76
+        smoothing_kernel_dimension: 3
+        occupancy_angle_weight: 5
+      min_inner_space_area: 2.5
+      map_file_path: ''  # NOTE: temporary use

@@ -1,0 +1,200 @@
+/**:
+  ros__parameters:
+    forward_planner:
+      update_timer_msec: 100
+      linear_profile:
+        max_speed: 1.0  # [m/s]
+        max_acceleration: 1.0  # [m/s^2]
+        max_deceleration: 1.2  # [m/s^2]
+        resolution: 0.01  # [m/s]
+      angular_profile:
+        max_speed: 3.0  # [rad/s]
+        max_acceleration: 5.0  # [rad/s^2]
+        max_deceleration: 5.0  # [rad/s^2]
+        resolution: 0.025  # [rad/s]
+      deceleration_for_stop: 0.2  #[m/s^2]
+      dense_angular_resolution: 0.025  # [rad/s]
+      outdated_input_time_threshold: 1.0
+      stuck_time_threshold: 1.5
+      forward_safety_distance: 0.15  # [m]
+      min_curvature_radius: 0.5
+      prediction_time: 2.0
+      score_weight:
+        goal_distance: 0.1
+        forward_clearance: 0.2
+      curvature_based:
+        use: false
+        max_absolute_curvature: 2.0
+        curvature_resolution: 0.1
+        zero_velocity_threshold: 0.01
+      arrival:
+        control_based:
+          use: false
+        error_tolerance: 0.03  # [m]
+        min_clearance: 0.2
+      stop_and_go:
+        min_clearance: 0.2
+      back_up:
+        use: true
+        max_speed: 0.2  # speed, should be positive
+        distance: 0.3
+        backward_safety_distance: 0.4
+      velocity_adjustment:
+        max_side_clearance: 0.5
+      velocity_regulation:
+        side_clearance:
+          gain: 3.0
+          offset: 0.3
+          prediction_time: 0.5
+        max_lateral_acceleration: 0.5
+      oscillation_prevention:
+        reset_time: 1.0
+        delta_w_threshold: 0.05
+        score_benefit_ratio: 0.05
+      enable_scored_velocity_list_visualization: false
+    forward_planner_rviz:
+      score_list_visualization:
+        lowest_score: -0.31
+        highest_score: 0.2
+    goal_generator:
+      update_timer_msec: 100
+      lookahead_distance:
+        max: 3.0  # [m]
+        min: 0.5  # [m]
+        adaptive:
+          use: false
+          pull_ratio: 3.0
+      condition:
+        input_timeout: 3.0  # [s]
+        distance_from_path_to_goal: 2.0  # [m]
+        folding_angle_threshold: 0.01745  # [rad]
+      destination:
+        modulation_boundary: 1.0
+        modulation_candidate_spacing: 0.2  # [m]
+        arrival_trigger_distance: 2.0  # [m]
+        arrival_trigger_theta: 0.78  # [rad]
+      modulation:
+        input_data_outdated_time_threshold: 2.0
+        region_of_interest:
+          angle_range: 1.5708
+          angle_resolution: 0.01
+        score_weight:
+          distance_to_goal: 1.0
+          forward_distance: 2.0
+        oscillatory_angle:
+          reset_time_interval: 10.0
+          delta_angle_threshold: 0.05
+          score_benefit_ratio: 0.3
+        max_side_clearance: 0.1
+        modulated_goal:
+          min_clearance_to_obstacle: 0.1
+    path_follower:
+      update_period: 0.1
+      linear_profile:
+        max_speed: 1.0
+        min_speed: 0.3
+        acceleration: 1.0
+        deceleration: 0.1
+      smooth_stopping:
+        trigger_distance: 0.1
+        deceleration: 0.05
+      angular_profile:
+        max_speed: 1.0
+      zero_velocity:
+        linear: 0.025
+        angular: 0.025
+      safety_margin:
+        forward: 0.5
+        angle: 0.785
+      arrival_tolerance:
+        distance: 0.05
+        heading: 0.05
+      path:
+        passing_tolerance: 0.5
+        waypoint_search_radius: 0.5
+        path_split_size: 10
+      control:
+        tracking:
+          basis_gain: 1.0
+          actuation_delay: 0.2
+        rotating:
+          robot_time_constant: 0.1
+          robot_slew_rate: 1.25
+      off_pathway_threshold: 0.1
+      braking_intervention_threshold: 0.2
+      turning_velocity_safety_factor: 1.2
+      use_path_clearance: true
+      monitor_switch: true
+      stuck_time_threshold: 1.5
+      timeout_threshold: 5.0
+    rotation_planner:
+      update_timer_msec: 100
+      valid_input_duration: 1.0
+      profile:
+        desired_speed: 2.0  # [rad/s]
+        robot_time_constant: 0.25  # [sec]
+        robot_slew_rate: 1.25
+        deceleration_level: 0.2
+      arrival_tolerance: 0.05  # [rad]
+      zero_velocity_threshold: 0.05  # [rad/s]
+      collision_free_angle_search:
+        step: 0.1  # [rad]
+        max_angle: 1.2  # [rad]
+        max_allowable_clearance: 1.0  # [m]
+        min_allowable_clearance: 0.4  # [m]
+        allowable_range: 0.1  # [m]
+        min_side_padding: 0.05  # [m]
+    stop_trigger:
+      update_timer_msec: 100
+      input_data_timeout: 1.0
+      input_data_max_queueing_time: 5.0
+      zero_speed_threshold: 0.05
+      dynamic_point_extraction:
+        grouping_distance: 0.35
+        observation_time: 5.0
+        max_occupation_time: 5.0
+        search_distance: 0.1
+        popup_points_portion: 0.4
+        occluded_area_angle_margin: 0.04  # [rad]
+        occluded_area_range_margin: 0.3
+      accumulation:
+        max_queueing_time: 1.5
+      clustering:
+        distance_threshold: 0.6
+        min_neighbors: 2
+        outdated_time_threshold: 0.5
+        min_valid_time_range: 0.4
+        min_cluster_length: 0.5
+        up_to_date_time_range: 0.3
+        max_time_gap_with_neighbor: 0.5
+      trajectory_filtering:
+        angle_threshold: 0.5236
+        side_margin: 0.8
+        rear_margin: 3.0
+        front_range_of_interest: 5.0
+        rear_range_of_interest: 2.0
+        side_range_of_interest: 1.5
+      trajectory_envelope_prediction:
+        prediction_time: 2.1
+        max_obstacle_speed: 3.0
+        max_time_to_cross: 5.0
+        ransac_iteration_count: 20
+        ransac_inlier_threshold: 0.2
+      person_nearby_trigger:
+        use: false
+        side_detection_clearance: 0.1
+        stop_distance: 2.0
+      enable_visualization: true
+    velocity_regulator:
+      update_timer_msec: 100
+      max_linear_velocity: 1.2
+      searching_distance: 1.0
+      angle_sector_count: 360
+      smoothing_factor: 0.5
+      person_safety_regulation:
+        enable: false
+        side_max_detection_distance: 0.3
+        front_max_detection_distance: 2.0
+        front_safety_distance: 1.0
+        epsilon_linear_velocity: 0.1
+        enable_safety_stop: true

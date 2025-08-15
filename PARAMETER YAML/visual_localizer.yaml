@@ -1,0 +1,84 @@
+/**:
+  ros__parameters:
+    odometer:
+      update_timer_msec: 100
+      camera_link:
+        extrinsics:
+          xyz: [0.0, 0.0, 0.0]
+          rpy: [0.0, 0.0, 0.0]
+      ## TrajectoryBuilder parameters
+      trajectory_builder:
+        sensor:
+          camera:
+            camera_name_list: ['front_left_infrared', 'front_right_infrared']
+            parallel_stereo_pair_list:
+              left_list: ['front_left_infrared']
+              right_list: ['front_right_infrared']
+          odometry:
+            timeout_threshold: 2.0  # [s]
+        map_initialization:
+          min_num_matches: 20
+        initial_guess:
+          pose_prediction_method: 1  # 0: constant velocity model, 1: odometry
+        feature:
+          point:
+            image_pyramid:
+              num_levels: 8
+              scale_factor: 0.95  # [0.0-1.0]
+            extraction:
+              max_num_features: 3000
+              fast_corner_threshold: 10  # [pixel]
+              angle_patch_radius: 15  # [pixel]
+              feature_index_grid:
+                cell_width: 10
+                cell_height: 10
+              strong_feature_selection:
+                cell_width: 20
+                cell_height: 20
+                num_features_per_cell: 1
+            matching:
+              temporal_matching:
+                search_window_size: 35
+                descriptor_distance_threshold: 100
+              static_matching:
+                descriptor_distance_threshold: 70
+                valid_depth_range:
+                  min: 0.1  # [m]
+                  max: 10.0  # [m]
+                interquartile_range:
+                  use: false
+                  scale: 1.5
+                  range: 1.4
+        optimization:
+          num_iterations: 1
+          odometry_cost_weight: 0.0  # [0.0-1.0]
+          success_condition:
+            min_num_matches: 10
+            min_inlier_ratio: 0.3  # [0.0-1.0]
+          outlier_rejection:
+            huber_loss_threshold: 2.0
+        keyframe_selection:
+          small_motion_to_skip:
+            distance: 0.01  # [m]
+            angle: 0.01  # [rad]
+          large_motion_to_selection:
+            distance: 0.3  # [m]
+            angle: 0.2  # [rad]
+          visual_distinction_to_selection:
+            low_tracked_num: 15
+            low_tracked_ratio: 0.4  # [0.0-1.0]
+            low_parallax: 10.0  # [pixel]
+      ## StructureOptimizer parameters
+      structure_optimizer:
+        active_window_size: 2
+        fixed_window_size: 5
+        optimization:
+          num_iterations: 1
+          odometry_cost_weight: 0.0  # [0.0-1.0]
+          success_condition:
+            min_num_matches: 5
+            min_inlier_ratio: 0.1  # [0.0-1.0]
+          outlier_rejection:
+            huber_loss_threshold: 0.5
+    odometer_rviz:
+      update_timer_msec: 100

@@ -1,0 +1,2 @@
+namespace: 'map_decomposer'
+module_list: ['map_builder_rviz']

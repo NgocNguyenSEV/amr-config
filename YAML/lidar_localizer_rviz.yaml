@@ -1,0 +1,8 @@
+namespace: 'lidar_localizer'
+preset: 'level_1'
+level_0:
+  module_list: []
+level_1:
+  module_list: ['map_manager_rviz']
+level_2:
+  module_list: ['map_builder_rviz', 'map_manager_rviz']

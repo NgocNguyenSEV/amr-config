@@ -1,0 +1,53 @@
+/**:
+  ros__parameters:
+    goal_generator:
+      lookahead_distance:
+        max: 1.0  # [m]
+        min: 0.4  # [m]
+        adaptive:
+          use: false
+          pull_ratio: 3.0
+      condition:
+        input_timeout: 3.0  # [s]
+        distance_from_path_to_goal: 2.0  # [m]
+        folding_angle_threshold: 0.01745  # [rad]
+      destination:
+        modulation_boundary: 0.1
+        modulation_candidate_spacing: 0.2  # [m]
+        arrival_trigger_distance: 2.0  # [m]
+        arrival_trigger_theta: 0.78  # [rad]
+      modulation:
+        input_data_outdated_time_threshold: 2.0
+        region_of_interest:
+          angle_range: 1.5708
+          angle_resolution: 0.01
+        score_weight:
+          distance_to_goal: 1.0
+          forward_distance: 2.0
+        oscillatory_angle:
+          reset_time_interval: 10.0
+          delta_angle_threshold: 0.05
+          score_benefit_ratio: 0.3
+        max_side_clearance: 0.1
+        modulated_goal:
+          min_clearance_to_obstacle: 0.1
+    path_planner:
+      update_timer_msec: 100  # [ms]
+      margin: -2.0  # [m]
+      velocity_cost:
+        valid_distance: 0.0  # [m]
+      use_fast_replanning: true  # [true / false]
+      use_los_pruning: true  # [true / false]
+      alternative_positions:
+        start: true  # [true / false]
+        goal: false  # [true / false]
+      arrival_threshold: 0.0  # [m]
+    path_planner_rviz:
+      verbose: false  # [true / false]
+      update_timer_msec: 500  # [ms]
+    map_manager:
+      occupied_threshold: 0  # [0 - 100]
+      update_timer_msec: 500  # [ms]
+    map_manager_rviz:
+      distance_grid_timer_msec: 500  # [ms]
+

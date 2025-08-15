@@ -1,0 +1,22 @@
+/**:
+  ros__parameters:
+    path_planner:
+      update_timer_msec: 100  # [ms]
+      margin: 0.05  # [m]
+      velocity_cost:
+        valid_distance: 0.2  # [m]
+      use_fast_replanning: true  # [true / false]
+      use_los_pruning: true  # [true / false]
+      alternative_positions:
+        start: true  # [true / false]
+        goal: false  # [true / false]
+      arrival_threshold: 0.0  # [m]
+    path_planner_rviz:
+      verbose: false  # [true / false]
+      update_timer_msec: 500  # [ms]
+    map_manager:
+      occupied_threshold: 65  # [0 - 100]
+      update_timer_msec: 500  # [ms]
+    map_manager_rviz:
+      distance_grid_timer_msec: 500  # [ms]
+                                                                                                         ~                                                                                                                                                                                                                                     ~                                                                                                                                                                                                                                     ~                                                                                                                                                                                                                                     ~                                                                                                                                                                                                                                     "path_planner.yaml" 21L, 659B

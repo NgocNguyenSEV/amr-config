@@ -1,0 +1,8 @@
+namespace: 'motion_planner'
+preset: 'level_1'
+level_0:
+  module_list: []
+level_1:
+  module_list: ['goal_generator_rviz', 'forward_planner_rviz']
+level_2:
+  module_list: ['goal_generator_rviz', 'forward_planner_rviz', 'stop_trigger_rviz', 'path_follower_rviz']

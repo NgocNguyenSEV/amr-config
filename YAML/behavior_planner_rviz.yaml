@@ -1,0 +1,8 @@
+namespace: ''
+preset: 'level_1'
+level_0:
+  module_list: []
+level_1:
+  module_list: ['behavior_planner_rviz']
+level_2:
+  module_list: ['behavior_planner_rviz']

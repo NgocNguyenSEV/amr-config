@@ -1,0 +1,11 @@
+namespace: 'visual_localizer'
+preset: 'level_1'
+level_0:
+  module_list: []
+level_1:
+  module_list: ['odometer_rviz']
+level_2:
+  module_list: ['odometer_rviz']
+odometer_rviz:
+  remappings:
+    - reference_pose: '/jass/lidar_localizer/pose'

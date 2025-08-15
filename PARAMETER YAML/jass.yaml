@@ -1,0 +1,9 @@
+namespace: '/jass'
+use_rosbag: false
+use_sim_time: false
+base_link_frame: 'base_link'
+core_list: ['behavior_planner', 'exploration_planner', 'expression_planner', 'freespace_estimator',
+  'lidar_localizer', 'motion_planner', 'path_planner', 'virtual_wall_generator']
+rviz_list: ['behavior_planner_rviz', 'freespace_estimator_rviz', 'lidar_localizer_rviz',
+  'motion_planner_rviz', 'path_planner_rviz']
+odom_topic_name: '/bot_sensor/odometer/odometry'

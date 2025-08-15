@@ -1,0 +1,12 @@
+bot_amr_equipment_bridge:
+  ros__parameters:
+    serial_port: "/dev/dsp_loader"
+    baud_rate: 115200
+    retry_count: 20
+    state_count: 4
+    reconnect_count: 3
+    update_timer_ms: 1000
+    state_timer_ms : 500
+    delay_timer_ms : 1000
+    use_checksum : true
+    acs_mission_cancel : false

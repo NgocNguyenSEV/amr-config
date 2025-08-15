@@ -1,0 +1,4 @@
+/**:
+  ros__parameters:
+    behavior_planner:
+      update_timer_msec: 100  # Time between each tick which invokes Update() function (milliseconds)

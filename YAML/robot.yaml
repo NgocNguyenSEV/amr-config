@@ -1,0 +1,75 @@
+/**:
+  ros__parameters:
+    robot:
+      shape:
+        footprint:
+          type: 'rectangle'
+          width: 0.44  # [m]
+          length: 0.535  # [m]
+          offset:  # rectangle center from baselink
+            x: 0.0  # [m], forward
+            y: 0.0  # [m], left
+        height: 1.0  # [m]
+      motion:
+        linear:
+          speed_max: 1.2
+          acceleration_max: 2.0
+          deceleration_max: 3.0
+        angular:
+          speed_max: 3.14
+          acceleration_max: 6.28
+          deceleration_max: 6.28
+        climbing:
+          height_max: 0.1
+      odometry:
+        min_valid_time_duration: 0.01  # [s], minimum time interval recommended for valid odometry sampling
+      sensor:  # all metrics: length(m), angle(rad)
+        front_depth_top_down:
+          topic: '/bot_sensor/camera_top_down/depth/image'
+          info_topic: '/bot_sensor/camera_top_down/depth/camera_info'
+          crop_offset:  # pixel
+            left: 30
+            right: 0
+            top: 0
+            bottom: 0
+          intrinsics:
+            range: [0.1, 2.0]
+          extrinsics:
+            xyz: [0.257, 0.02, 0.186]
+            rpy: [0.0, 0.5235, 0.015]
+          is_scanning_ground: true
+        front_depth_bottom_left:
+          topic: '/bot_sensor/camera_bottom_left/depth/image'
+          info_topic: '/bot_sensor/camera_bottom_left/depth/camera_info'
+          intrinsics:
+            range: [0.1, 2.5]
+          extrinsics:
+            xyz: [0.24, 0.14, 0.133]
+            rpy: [-3.12408, -0.553413, 0.582404]
+          is_scanning_ground: false
+        front_depth_bottom_right:
+          topic: '/bot_sensor/camera_bottom_right/depth/image'
+          info_topic: '/bot_sensor/camera_bottom_right/depth/camera_info'
+          intrinsics:
+            range: [0.1, 2.5]
+          extrinsics:
+            xyz: [0.23, -0.16, 0.133]
+            rpy: [3.12959, -2.56363, 2.59977]
+          is_scanning_ground: false
+        lidar:  # spinning lidar
+          topic: '/bot_sensor/lidar_front/laser_scan'
+          intrinsics:
+            range: [0.01, 15.0]  # [min, max]
+            fov: [0.0, 1.7453, 2.0071, 2.5133, 2.8798, 3.4557, 3.7700, 4.2936, 4.5729,
+              6.28]
+          extrinsics:
+            xyz: [0.1675, 0.0, 0.2285]
+            yaw: -0.0031
+            inverted: false
+        virtual_sensor:
+          topic: '/jass/virtual_sensor/virtual_sensor'
+          intrinsics:
+            range: [0.1, 15.0]  # [min, max]
+          extrinsics:
+            xyz: [0.0, 0.0, 0.3]
+            yaw: 0.0

@@ -1,0 +1,45 @@
+bot_amr_safety_fields:
+    ros__parameters:
+      use_sim_time: True
+      footprint_topic: "footprint"
+      footprint: "[[0.660, 0.375],[-0.660, 0.375],[-0.660, -0.375],[0.660, -0.375]]"
+      footprint_padding: 0.0
+      robot_radius: 0.4
+      safety_margin_front: 0.4  
+      safety_margin_back: 0.4
+      safety_margin_left: 0.1   => 0.45
+      safety_margin_right: 0.1   => 0.45
+      safety_margin_rotation: 0. => 0.45
+      tape_guided_safety_margin_front: 0.3
+      tape_guided_safety_margin_back: 0.3
+      distance_warning: 3.0
+      min_speed_warning: 0.0
+      global_frame_id: base_link
+      robot_base_frame_id: base_link
+      odom_frame_id: odom
+      transform_tolerance: 0.1
+      use_rear_lidar: true
+      front_lidar_frame_id: lidar_front
+      rear_lidar_frame_id: lidar_rear
+      observation_sources: scan_front #scan_rear
+      use_sor: true
+      data_type: obstacle_points
+      scan_front:
+        topic: /jass/freespace_estimator/freespace_estimator_3d/obstacle_points
+        max_obstacle_height: 2.0
+        data_type: "PointCloud2"                                                                  
+        inf_is_valid: true                                                                          
+        sensor_frame: "[[0.560, 0.0, 0.135 0.0, 0.0, 0.0]]" # [ x (m), y (m), z (m), roll
+      #   topic: /bot_sensor/lidar_rear/laser_scan                                                
+      #   max_obstacle_height: 2.0                                                               
+      #   data_type: "LaserScan"                                                                      
+      #   inf_is_valid: true                                                                         
+      #   sensor_frame: "[[-0.560, 0.0, 0.135 0.0, 0.0, 3.141592]]" # [ x (m), y (m), z (m),
+
+
+
+
+
+
+
+

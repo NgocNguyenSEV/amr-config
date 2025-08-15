@@ -1,0 +1,8 @@
+dcu_node:
+  ros__parameters:
+    id: 1
+    baud_rate: 115200
+    serial_port: "/dev/ttyS0"
+    type: "fake"
+    has_turn_table_lift: True
+    has_charging : False

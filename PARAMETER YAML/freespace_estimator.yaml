@@ -1,0 +1,92 @@
+/**:
+  ros__parameters:
+    carpet_detector:
+      depth_list: ['front_depth_top_down']
+      height_map:
+        dimension: 500
+        resolution: 0.01
+      neighbor_cell_distance: 4
+      min_obstacle_height: 0.006
+      min_carpet_cell_area: 0.01
+      max_carpet_height: 0.03
+    depth_analyzer:
+      depth_list: ['front_depth_top_down', 'front_depth_bottom_left', 'front_depth_bottom_right']
+      decimation_filter:
+        enable: true
+        size: 4
+      min_pooling_filter:
+        enable: false
+        size: 4
+      ransac_info:
+        iteration: 100
+        inlier_distance: 0.008
+      ground_plane_validation:
+        max_z_translation: 0.1
+        max_roll_rotation: 0.0349066
+        max_pitch_rotation: 0.0872665
+      depth_info:
+        front_depth_top_down:
+          plane_estimation:
+            ransac_info:
+              sampled_image_width: 10
+              sampled_image_height: 10
+              sampling_region_upper: 0.1
+              sampling_region_lower: 0.1
+              sampling_region_left: 0.1
+              sampling_region_right: 0.1
+    depth_analyzer_rviz:
+      depth_list: ['front_depth_top_down', 'front_depth_bottom_left', 'front_depth_bottom_right']
+      visualize_pixel_shadow: false
+    lidar_analyzer:
+      odometry_holding_time: 5.0
+      lidar_list: ['lidar']
+    map_manager:
+      update_timer_msec: 500
+      freespace_map_layer:
+        enable: false
+        probability_hit: 0.55
+        probability_miss: 0.45
+        point_scan_holding_time: 5.0
+        update_radius: 2.5
+      pose_with_twist:
+        time_difference_limit: 0.01  # [sec]
+        angular_speed_limit: 0.4  # [radian/sec]
+      tile_update_history:
+        max_queue_size: 5
+        holding_time_sec: 60.0
+      use_reset_freespace_map: true
+      carpet_count_threshold: 5
+      water_count_threshold: 1
+    map_manager_rviz:
+      update_timer_msec: 500
+    obstacle_extractor:
+      update_timer_msec: 100
+      use_scan_accumulation: false
+      obstacle_point_cloud_size: 360
+      odometry_holding_time: 5.0
+      point_scan_holding_time: 5.0
+      local_map:
+        dimension: 100
+        resolution: 0.01
+        max_update_range: 2.5
+        pivot_keeping_range: 2.0
+      dynamic_obstacle_filter:
+        use: false
+        ground_height: 0.01
+        preserving_time:
+          min: 1.5
+          max: 3.0
+      visualization:
+        occupied: false
+        ground: false
+      height_map:
+        dimension: 500
+        resolution: 0.01
+      low_obstacle:
+        neighbor_cell_distance: 4
+        min_height: 0.006
+        max_height: 0.03
+        min_cell_area: 0.0005
+        ground_height: 0.001
+        count_threshold: 3
+

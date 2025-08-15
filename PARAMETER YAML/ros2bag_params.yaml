@@ -1,0 +1,16 @@
+# ros2 bag record option: output
+output: /var/log/ros2bag
+# ros2 bag record option: 64MB (file size - split)
+file_size: 16777216
+# ros2 bag record option: 0B (cache size) ===> not used now
+cache_size: 0
+# storage option: number of keep files (*.db3)
+keep_file: 4
+# storage option: number of keep directories
+keep_dir: 4
+# time in ms to wait between querying available topics for recording
+polling_interval: 100
+# storage option: delete file interval (seconds)
+remove_interval: 30
+# ros2bag record disable
+is_disable: True

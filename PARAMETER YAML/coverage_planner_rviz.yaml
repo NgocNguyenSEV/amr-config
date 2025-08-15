@@ -1,0 +1,13 @@
+namespace: 'coverage_planner'
+module_list: ['coverage_manager_rviz', 'line_follower_rviz', 'boundary_follower_rviz']
+coverage_manager_rviz:
+  remappings:
+    - pose: '/pose'
+line_follower_rviz:
+  remappings:
+    - pose: '/pose'
+    - line_follower/desired_velocity: '/desired_twist'
+boundary_follower_rviz:
+  remappings:
+    - pose: '/pose'
+    - boundary_follower/desired_velocity: '/desired_twist'

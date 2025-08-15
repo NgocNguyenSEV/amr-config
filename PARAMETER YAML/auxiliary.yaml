@@ -1,0 +1,3 @@
+module_list: ['rviz2']
+rviz2:
+  rviz_config_path: 'gazebo.rviz'

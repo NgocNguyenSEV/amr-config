@@ -1,0 +1,89 @@
+# For real amr experiments, Projects/ROS2-AMR/src/amr_bringup/param/sites/suwon/gtc/001/amr_suwon_gtc_001.yaml
+# SHOULD be modified instead of this file.
+
+pose_msf:
+  ros__parameters:
+
+    pose_msf_simulation: true # if true, amr_pose_msf can be executed independently. otherwise experiments
+    verbose: true  # screen message on/off
+    save_logging_data:   true  # for simulation of bag files
+
+    # prefix of file name for the saved data
+
+    #saved_file_name_prefix: "220707" # real amr test with bag file (latest_data)-BUT without /imu_data 
+    saved_file_name_prefix: "220629" # real amr test (until this day, bag files have wrong time stamp at msf)
+    #saved_file_name_prefix: "220620" # real amr tests(urdf),reset_imu_to_msf=false, sigma_qr_f,l=10 
+    #saved_file_name_prefix: "220620_2" # real amr tests with new code (urdf),reset_imu_to_msf=true 
+    #saved_file_name_prefix: "220620_1" # real amr tests with new code (urdf), reset_imu_to_msf=false
+    #saved_file_name_prefix: "220525b" # best parameters 1
+    #saved_file_name_prefix: "220525v" # reset_imu,mcl_to_msf true
+    #saved_file_name_prefix: "220525u" # AMR data with improved QR recog (many problems)
+    #saved_file_name_prefix: "220523" # AMR data 
+    #saved_file_name_prefix: "220504_2no" # mcl NOT meas updated + AMR code
+    #saved_file_name_prefix: "220504_2" # mcl resetted + AMR code
+    #saved_file_name_prefix: "220504" # QR yaw bad 
+    #saved_file_name_prefix: "220415" # first bag file 
+    saved_file_path: "./src/amr_navigation/amr_pose_msf/data/" # path to saved files
+
+    # to adjust mcl dato to be aligned with QR data (qr - mcl)
+    mcl_offset_x:  0. #102000. before 220526
+    mcl_offset_y:  0. #112000. before 220526
+    mcl_offset_theta: 0. # 0.
+
+    imu_topic:  /imu_data
+    odom_topic: /odom
+    qr_topic:   /qr_cam_pose_in_world
+    mcl_topic:  /estimated_pose
+    msf_topic:  ~/msf_pose   # /pose_msf/msf_pose
+    #use_mcl_topic: ~/use_mcl # /pose_msf/use_mcl 
+    localizer_mode_topic_:  /behavior_state
+
+    # msf reset parameters 2206 (false in QR AGV)
+    reset_imu_to_msf : false  # reset imu yaw to msf yaw rather than QR yaw (in case poor QR yaw)
+    reset_mcl_to_msf : false  # reset mcl yaw,x,y to msf yaw,x,y rather than QR yaw,x,y (poor QR)
+
+    use_mcl_meas_up:    false # to use measurement update of mcl data. this is only default (topic )
+    sigma_mcl_t:        5. #deg temporary
+    sigma_mcl_xy:     100. #mm  temporary
+    enable_mah_outlier_rejection_mcl_t:  false  # temporary
+    enable_mah_outlier_rejection_mcl_xy: false  # temporary
+    mah_threshold_mcl_t: 10. #temporary
+    mah_threshold_mcl_xy: 10. #temporary
+    delay_mcl:          0. #temporary
+
+    sigma_QRCode:      1.   # measurement noise of QR code reading in deg
+    sigma_qr_forward:  10. # measurement noise of qr code x(forward)position in mm
+    sigma_qr_lateral:  10. # measurement noise of qr code x(lateral)position in mm
+
+    sigma_n_forward: 500.
+    sigma_n_lateral: 250.
+    sigma_n_v:        10.
+
+    sigma_IMU:         0.25
+    sigma_odom:        5.
+    sigma_n_theta:    10.
+    sigma_n_bias:      0.1
+    sigma_theta:      10.
+    sigma_bias:        0.1
+    enable_mah_outlier_rejection_qr_f: false
+    enable_mah_outlier_rejection_qr_l: false
+    enable_mah_outlier_rejection_qr_t: false
+    enable_mah_outlier_rejection_imu:  true
+    enable_mah_outlier_rejection_odom: true
+    mah_threshold_qr_f: 20.
+    mah_threshold_qr_l: 10.
+    mah_threshold_qr_t:  4.
+    mah_threshold_imu:  10.
+    mah_threshold_odom: 10.
+    delay_qr:   0.000
+    delay_imu:  0.000
+    delay_odom: 0.000
+    use_imu_offset:          true
+    use_avg_nbhd_imu_offset: true
+    npts_imu_offset:         3
+    use_relative_imu:        false
+    use_relative_odom:       true
+
+
+
+

@@ -1,0 +1,66 @@
+/**:
+  ros__parameters:
+    freespace_estimator:
+      update_timer_msec: 100
+      # list of sensors
+      lidar_list: ['lidar_front_sor', 'lidar_rear_sor', 'virtual_sensor']
+      #depth_list: []
+      enable_logger: false
+      enable_visualization: false
+      freespace_map:
+        resolution: 0.04
+        dimension_x: 120
+        dimension_y: 120
+        negligible_height: 0.05
+        noise_size_threshold: 3
+        obstacle_point_list_size: 360
+        enable_motion_integrator: false
+      depth_decimation_step: 4
+      rectification:
+        ransac:
+          iteration: 100
+          sampling_width: 10
+          sampling_height: 10
+          sampling_upper: 0.1
+          sampling_lower: 0.9
+          sampling_side: 0.1
+          inlier_distance: 0.008
+        plane_coefficients_threshold_for_validation:
+          c: 0.9994
+          d: 0.05
+          variance_x: 0.001
+      virtual_laser_scan:
+        enable: false
+        z_range: [0.2, 0.3]
+    carpet_detector:
+      # depth_list: []
+      height_map:
+        dimension: 500
+        resolution: 0.01
+      neighbor_cell_distance: 4
+      min_obstacle_height: 0.006
+      min_carpet_cell_area: 0.01
+      max_carpet_height: 0.03
+    depth_analyzer:
+      # depth_list: ['front_depth']
+      decimation_filter:
+        enable: true
+        size: 4
+      min_pooling_filter:
+        enable: false
+        size: 4
+      ransac_info:
+        iteration: 100
+        inlier_distance: 0.008
+      ground_plane_validation:
+        max_z_translation: 0.1
+        max_roll_rotation: 0.0349066
+        max_pitch_rotation: 0.0872665
+      depth_info:
+        front_depth_top_down:
+          plane_estimation:
+            ransac_info:
+              sampled_image_width: 10
+              sampled_image_height: 10
+              sampling_region_upper: 0.1
+"freespace_estimator.yaml" 124L, 3501B                                                                                                                                                                              1,1           Top

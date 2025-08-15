@@ -1,0 +1,203 @@
+/**:
+  ros__parameters:
+    localizer:
+      update_timer_msec: 50  # [ms]
+      odometry_timeout_threshold: 2.0  # [s]
+      point_scan_timeout_threshold: 2.0  # [s]
+      particle:
+        min_num: 100  # [n]
+        max_num: 1000  # [n]
+        position_radius_stddev:
+          initialization: 0.3  # [m]
+          convergence: 0.05  # [m]
+          divergence: 0.4  # [m]
+        theta_stddev:
+          initialization: 0.08  # [rad]
+      motion_model:
+        is_omnidirectional_robot: false
+        odometry_noise_factor:
+          translation_to_longitudinal: 0.003  # [m]
+          translation_to_lateral: 0.003  # [m], only works for omnidirectional robot
+          rotation_to_translation: 0.0001  # [m^2 / rad]
+          translation_to_rotation: 0.0001  # [rad^2 / m]
+          rotation_to_rotation: 0.002  # [rad]
+          random_noise:
+            translation: 0.0  # [m]
+            rotation: 0.0  # [rad]
+      sensor_model:
+        max_range: 15.0  # [m]
+        hit_probability_weight: 0.95  # [0, 1)
+        hit_probability_stddev: 0.05  # [m]
+        particle_likelihood_threshold: 0.0  # [0, 1)
+      resampling:
+        min_effective_sample_ratio: 0.1  # [0, 1)
+        chi_square_confidence: 0.95  # [0, 1)
+      static_pose_tolerance:
+        translation: 0.001  # [m]
+        rotation: 0.001  # [rad]
+      point_subsampling:
+        min_num_points: 100  # [n]
+        max_resolution: 0.3  # [m]
+    map_builder:
+      update_timer_msec: 20
+      tile_info:
+        dimension: 100
+        resolution: 0.05
+      tile_update_history:
+        max_list_size: 5
+        holding_time_sec: 60.0
+      probability_map:
+        probability_hit: 0.55
+        probability_miss: 0.48
+      motion_filter:
+        min_distance_diff: 0.2
+        min_angle_diff: 0.2
+      voxel_filter:
+        use: true
+        max_voxel_size: 0.5
+        min_scan_size: 200
+      ring_filter:
+        use: false
+        max_divider: 8
+        min_scan_size: 200
+      correlative_scan_matcher:
+        confident_scan_size: 0
+        linear_search_window: 0.2
+        angular_search_window: 0.5
+        angular_search_step: 0.01
+        linear_cost_weight: 0.1
+        angular_cost_weight: 0.1
+      ceres_scan_matcher:
+        confident_scan_size: 0
+        data_scaling_factor: 1.0
+        normal_translation_scaling_factor: 10.0
+        normal_rotation_scaling_factor: 40.0
+        low_confident_translation_scaling_factor: 40.0
+        low_confident_rotation_scaling_factor: 40.0
+      timeout:
+        set_odometry: 5.0
+        set_point_scan: 5.0
+        activate_action: 5.0
+        pull_map_action: 5.0
+    map_renderer:
+      update_timer_msec: 500
+      tile_dimension: 100
+      tile_resolution: 0.05
+      tile_update_history:
+        max_list_size: 5
+        holding_time_sec: 60.0
+    map_renderer_rviz:
+      occupancy_grid_timer_msec: 500
+      occupancy_grid_saver:
+        occupancy_grid_save: false
+        save_path: 'map.dat'
+        occupied_threshold: 65
+        free_threshold: 10
+    map_manager:
+      update_timer_msec: 100
+      grid_update_log:
+        max_list_size: 5
+        holding_time: 60.0
+      map_update_threshold: 5.0
+    map_manager_rviz:
+      update_timer_msec: 500
+    motion_compensator:
+      use_ldlidar: false
+      range_min: 0.1
+      range_max: 15.0
+      rectify_lidar_clock: false
+      lidar_clock_rectifier:
+        duration: 0.085
+        queue_length: 50
+        estimate_duration: true
+        duration_estimator:
+          queue_length: 100
+          min_duration: 0.075
+          max_duration: 0.095
+      lidar_list: ['lidar']
+    pose_extrapolator:
+      update_timer_msec: 10
+      input_timeout: 1.0  # [s]
+    principal_angle_estimator:
+      update_timer_msec: 1000
+      use_bimodal_estimation: true
+      angle_difference_threshold: 0.0523
+      index_distance_two_point: 3
+      minimum_vote_threshold: 20
+      voxel_filter:
+        max_size: 0.5
+        min_scan_num: 200
+    relocalizer:
+      update_timer_msec: 500
+      global_angular_search_window: 3.14159
+      local_linear_search_window: 1.0
+      local_angular_search_window: 0.17453
+      score_threshold: 0.1
+      branch_and_bound_depth: 7
+      candidate_scoring_height: 1
+      voxel_filter:
+        enabled: true
+        max_voxel_size: 0.5
+        min_scan_num: 150
+      unknown_grid_ratio_penalty:
+        enabled: true
+        multiplier: 5.0
+    trajectory_builder:
+      update_timer_msec: 25
+      map_resolution: 0.05
+      scans_per_submap: 50
+      scan_list_downsampling_stride: 5
+      submap_update_history:
+        max_list_size: 5
+        holding_time_sec: 60.0
+      probability_map:
+        probability_hit: 0.55
+        probability_miss: 0.48
+      voxel_filter:
+        use: false
+        max_size: 0.5
+        min_scan_num: 200
+      ring_filter:
+        use: true
+        max_divider: 8
+        min_scan_size: 200
+      motion_filter:
+        min_distance_diff: 0.1
+        min_angle_diff: 0.2
+      correlative_scan_matcher:
+        confident_scan_size: 0
+        linear_search_window: 0.2
+        angular_search_window: 0.5
+        angular_search_step: 0.01
+        linear_cost_weight: 3.0
+        angular_cost_weight: 0.1
+      ceres_scan_matcher:
+        data_scaling_factor: 1.0
+        normal_translation_scaling_factor: 10.0
+        normal_rotation_scaling_factor: 0.0
+        confident_scan_size: 0
+        low_confident_data_scaling_factor: 1.0
+        low_confident_translation_scaling_factor: 10.0
+        low_confident_rotation_scaling_factor: 0.0
+      auto_align_map_angle: true  # auto align the map angle by the first scan on mapping
+      submap_list_timer_msec: 200
+    trajectory_optimizer:
+      update_timer_msec: 50
+      linear_search_window: 3.0
+      angular_search_window: 0.5
+      angular_search_step: 0.01
+      min_scan_size: 150
+      max_scan_to_submap_distance: 6.0
+      min_scan_matching_score: 0.65
+      max_tree_height: 7
+      huber_scale: 1.0
+      fix_first_submap_pose: true
+      use_analytic_cost: true
+      use_constraint_drop: false
+      use_switch_variable: true
+      max_xy_information_ratio: 1.8
+      switch_variable_information: 10.0
+      ceres_scan_matcher:
+        data_scaling_factor: 1.0
+        translation_scaling_factor: 10.0
+        rotation_scaling_factor: 0.0

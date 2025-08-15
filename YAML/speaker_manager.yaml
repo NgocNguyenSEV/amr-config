@@ -1,0 +1,15 @@
+bot_amr_speaker_manager:
+  ros__parameters:
+    AmrState: amr_states
+    ControlMode: control_mode
+    Odometry: odom
+    ObstacleDetect: is_obstacle_in_safety_field
+    ObstacleDetectWarning: is_obstacle_in_warning_field
+    LowBattery: low_battery
+    Language: en
+    InitVolume: 7
+    EquipmentState: bot_amr_equipment_bridge/equipment_state
+    ManipulatorState: bot_amr_manipulator_bridge/equipment_state
+    TapeAGVState: tape_agv_state
+    BaseLiftState: base_lift_state
+    TurnTableLiftState: turn_table_lift_state

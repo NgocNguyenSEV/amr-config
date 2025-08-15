@@ -1,0 +1,190 @@
+bot_amr_behavior_tree:
+  ros__parameters:
+    default_bt_xml_filename: amr_bt.xml
+    enable_groot_monitoring: True
+    groot_zmq_publisher_port: 1666
+    groot_zmq_server_port: 1667
+    update_timer_msec: 100 # [msec]
+    force_correct_initial_pose: True
+    use_legacy_light_sensor_state: False
+
+    enforce_loaded_footprint: False
+    robot_footprint:
+      width: 0.45 # [m]
+      length: 0.45 # [m]
+      extrinsic_x: 0.0 # [m] 
+      extrinsic_y: 0.0 # [m]
+    pre_docking_footprint:
+      width: 0.45 # [m]
+      length: 0.45 # [m]
+      extrinsic_x: 0.0 # [m]
+      extrinsic_y: 0.0 # [m]
+    docking_footprint:
+      width: 0.85 # [m]
+      length: 0.45 # [m]
+      extrinsic_x: 0.0 # [m] 
+      extrinsic_y: 0.0 # [m]
+    side_docking_footprint:
+      width: 0.45 # [m]
+      length: 0.45 # [m]
+      extrinsic_x: 0.0 # [m] 
+      extrinsic_y: 0.0 # [m]
+
+    pre_docking_marker_array_range: 10.0 # [m]
+    enable_docking_goal_heading: False
+    general_tolerance:
+      distance: 0.10 # [m]
+      heading: 2.0 # [deg]
+    undocking_tolerance:
+      distance: 0.05 # [m]
+      heading: 2.0 # [deg]
+
+    gpio_input_data: [0, 0, 0, 0, 0, 0, 0, 0]
+    gpio_output_data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    has_lift_sensor: False
+    has_fmr: False
+    has_kbot: False
+    has_tape_agv: False
+    tape_read_min_max_threshold: 2.0
+    min_tape_read_count: 3
+    enable_guide_sensor_switch: False
+
+    module_initialization_timeout: 60.0 # [sec]
+    module_restart_timeout: 20.0 # [sec]
+    charging_timeout: 30.0 # [sec]
+    turn_table_lift_timeout: 10.0 # [sec]
+    base_lift_timeout: 20.0 # [sec]
+    base_lift_retry_timeout: 10.0 # [sec]
+    gpio_comm_timeout: 30.0 # [sec]
+
+    evasive_mode:
+      pre_decelerator:
+        enable: True
+        min_velocity: 0.5 # [m/s]
+      path_planner:
+        margin: 0.05 # [m]
+      forward_planner:
+        forward_safety_distance: 0.4 # [m]
+      rotation_planner:
+        min_allowable_clearance: 0.4  # [m]
+      goal_generator:
+        lookahead_distance_max: 3.0 # [m]
+        lookahead_distance_min: 0.5 # [m]
+        lookahead_distance_adaptive_pull_ratio: 3.0
+      lidar_localizer:
+        is_omnidirectional_robot: False
+        hit_probability_stddev: 0.05
+    stop_and_go_mode:
+      pre_decelerator:
+        enable: True
+        min_velocity: 0.0 # [m/s]
+      path_planner:
+        margin: 0.05 # [m]
+      forward_planner:
+        forward_safety_distance: 1.2 # [m]
+      rotation_planner:
+        min_allowable_clearance: 1.2 # [m]
+      goal_generator:
+        lookahead_distance_max: 3.0 # [m]
+        lookahead_distance_min: 0.5 # [m]
+        lookahead_distance_adaptive_pull_ratio: 3.0
+      lidar_localizer:
+        is_omnidirectional_robot: False
+        hit_probability_stddev: 0.05
+    pre_docking_mode:
+      pre_decelerator:
+        enable: True
+        min_velocity: 0.0 # [m/s]
+      path_planner:
+        margin: 0.05 # [m]
+      forward_planner:
+        forward_safety_distance: 0.4 # [m]
+      rotation_planner:
+        min_allowable_clearance: 0.4 # [m]
+      goal_generator:
+        lookahead_distance_max: 3.0 # [m]
+        lookahead_distance_min: 0.5 # [m]
+        lookahead_distance_adaptive_pull_ratio: 3.0
+      lidar_localizer:
+        is_omnidirectional_robot: False
+        hit_probability_stddev: 0.05
+    docking_mode:
+      pre_decelerator:
+        enable: True
+        min_velocity: 0.0 # [m/s]
+      path_planner:
+        margin: 0.05 # [m]
+      forward_planner:
+        forward_safety_distance: 0.4 # [m]
+      rotation_planner:
+        min_allowable_clearance: 0.4 # [m]
+      goal_generator:
+        lookahead_distance_max: 0.4 # [m]
+        lookahead_distance_min: 0.1 # [m]
+        lookahead_distance_adaptive_pull_ratio: 3.0
+      lidar_localizer:
+        is_omnidirectional_robot: False
+        hit_probability_stddev: 0.05
+    side_docking_mode:
+      pre_decelerator:
+        enable: True
+        min_velocity: 0.0 # [m/s]
+      path_planner:
+        margin: -1.0 # [m]
+      forward_planner:
+        forward_safety_distance: 0.1 # [m]
+      rotation_planner:
+        min_allowable_clearance: 0.1 # [m]
+      goal_generator:
+        lookahead_distance_max: 1.0 # [m]
+        lookahead_distance_min: 0.5 # [m]
+        lookahead_distance_adaptive_pull_ratio: 3.0
+      lidar_localizer:
+        is_omnidirectional_robot: True
+        hit_probability_stddev: 0.05
+    lidar_docking_mode:
+      pre_decelerator:
+        enable: True
+        min_velocity: 0.0 # [m/s]
+      path_planner:
+        margin: -1.0 # [m]
+      forward_planner:
+        forward_safety_distance: 0.1 # [m]
+      rotation_planner:
+        min_allowable_clearance: 0.1 # [m]
+      goal_generator:
+        lookahead_distance_max: 1.0 # [m]
+        lookahead_distance_min: 0.5 # [m]
+        lookahead_distance_adaptive_pull_ratio: 3.0
+      lidar_localizer:
+        is_omnidirectional_robot: True
+        hit_probability_stddev: 0.05
+
+    # proc_check_list: [
+    #   "bot_amr_acs_manager",
+    #   "bot_amr_controllers",
+    #   "bot_amr_map_manager",
+    #   "bot_amr_mission_manager",
+    #   "bot_amr_pose_msf",
+    #   "bot_amr_qr_localizer",
+    #   "bot_jass_behavior_planner",
+    #   # "bot_jass_forward_planner",
+    #   # "bot_jass_freespace_estimator",
+    #   # "bot_jass_freespace_map_manager",
+    #   # "bot_jass_freespace_motion_integrator",
+    #   # "bot_jass_goal_generator",
+    #   # "bot_jass_localizer_v2",
+    #   # "bot_jass_map_renderer",
+    #   # "bot_jass_motion_compensator",
+    #   # "bot_jass_path_planner",
+    #   # "bot_jass_planner_map_manager",
+    #   # "bot_jass_pose_extrapolator",
+    #   # "bot_jass_relocalizer",
+    #   # "bot_jass_rotation_planner",
+    #   # "bot_jass_trajectory_builder",
+    #   # "bot_jass_virtual_sensor",
+    #   "bot_sensor_camera_v4l2",
+    #   "bot_sensor_imu_amr",
+    #   "bot_sensor_lidar_sicklidar",
+    #   # "bot_sensor_odometer"
+    # ]

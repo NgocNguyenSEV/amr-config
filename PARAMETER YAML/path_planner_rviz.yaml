@@ -1,0 +1,10 @@
+namespace: ''
+preset: 'level_1'
+level_0:
+  module_list: []
+level_1:
+  module_list: ['path_planner_rviz']
+level_2:
+  module_list: ['path_planner_rviz', 'map_manager_rviz']
+map_manager_rviz:
+  namespace: 'path_planner'

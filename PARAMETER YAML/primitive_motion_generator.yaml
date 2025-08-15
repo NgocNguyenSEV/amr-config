@@ -1,0 +1,31 @@
+/**:
+  ros__parameters:
+    primitive_motion_generator:
+      update_timer_msec: 100
+      ignore_obstacle: false
+      generate_curved_motion: false
+      max_goal_range: 5.0
+      arrival_tolerance:
+        distance: 0.02
+        heading: 0.05
+      zero_speed_tolerance:
+        linear: 0.001
+        angular: 0.05
+      linear_profile:
+        max_speed: 1.0
+        acceleration: 1.0
+        deceleration: 0.5
+      angular_profile:
+        min_speed: 0.1
+        max_speed: 2.5
+        time_constant: 0.2
+        slew_rate: 1.25
+      clearance_margin:
+        length: 0.05
+        angle: 0.3
+      hard_braking_profile:
+        deceleration: 0.4
+        trigger_speed: 0.2
+    primitive_motion_generator_rviz:
+      update_timer_msec: 100
+      rotation_guideline_radius_step: 0.15

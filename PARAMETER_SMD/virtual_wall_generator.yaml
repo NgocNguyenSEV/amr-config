@@ -1,0 +1,14 @@
+/**:
+  ros__parameters:
+    virtual_wall_manager:
+      remove_edge_width: 0.05
+    virtual_sensor:
+      update_timer_msec: 100
+      outdated_pose_time_sec: 1.0
+      angle_increment: 0.017453292519943
+      angle_min: 0.0
+      angle_max: 6.283185307179586
+      max_scan_range: 10.1
+      min_scan_range: 0.05
+
+"virtual_wall_generator.yaml" 12L, 314B

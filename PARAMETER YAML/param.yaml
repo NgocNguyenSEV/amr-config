@@ -1,0 +1,60 @@
+/**:
+  ros__parameters:
+    laser_line_extraction:
+      update_timer_msec: 100
+      frame_id: 'base_link'
+      enable: true
+      enable_logger: false
+      enable_visualization: false
+      robot_width: 0.453
+      robot_length: 0.545
+      robot_offset_x: 0.0
+      robot_offset_y: 0.0
+      lidar_list: ["lidar_front", "lidar_rear"]
+      lidar_front:
+        topic: '/bot_sensor/lidar_front/laser_scan'
+        extrinsics:
+          xyz: [0.1718, -0.1558, 0.2635]
+          yaw: -0.785398163
+          inverted: false
+      lidar_rear:
+        topic: '/bot_sensor/lidar_rear/laser_scan'
+        extrinsics:
+          xyz: [-0.1718, 0.1558, 0.2635]
+          yaw: 2.35619449
+          inverted: false
+      bearing_std_dev: 0.001
+      range_std_dev: 0.02
+      least_sq_angle_thresh: 0.0001
+      least_sq_radius_thresh: 0.0001
+      max_line_gap: 0.01
+      min_line_length: 0.07
+      min_split_dist: 0.02
+      outlier_dist: 0.05
+      min_line_points: 9
+      min_range: 0.05
+      max_range: 20.0
+      side_filtering: 0.5
+    docking_planner:
+      docking_direction: 0 # 0: forward, 1: backward
+      dock_shape: 1 # 0: -v- , 1: v
+      dock_origin_angle: 1.7
+      shape_angle_tolerance: 0.1
+      shape_dist_tolerance: 0.03
+      dock_left_angle: 3.9
+      dock_right_angle: 3.8
+      dist_to_dock: 0.0
+      dist_from_center: -0.205
+      dock_sample_num: 5
+      docking_timeout_sec: 60 # sec
+      arrival_threshold:
+        dist: 0.05
+        angle: 0.05
+      skip_pre_dock: true
+      pre_dock_dist: 0.5
+      pre_dock_trigger_theta: 0.1
+      using_lidar:
+        front: "lidar_front"
+        rear: "lidar_rear"
+        side_left: "lidar_front"
+        side_right: "lidar_front"

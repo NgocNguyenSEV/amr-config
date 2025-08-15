@@ -1,0 +1,47 @@
+/**:
+  ros__parameters:
+    depth_converter:
+      depth_sensor_id: 'top_depth'
+      decimation_step: 20
+      accumulation_size: 1
+    pose_extrapolator:
+      update_timer_msec: 10
+    trajectory_builder:
+      update_timer_msec: 30
+      map_visualization:
+        publish_timer_msec: 500
+        point_cloud_map: true
+        covariance: false
+      motion_filter:
+        min_distance_difference: 0.1  # [m]
+        min_angle_difference: 0.01  # [rad]
+      voxel_filter:
+        map_resolution: 0.1  # [m]
+        scan_resolution: 0.2  # [m]
+      match_precondition:
+        matchable_eigen_value_ratio: 0.3
+      ndt_resolution: 0.5  # [m]
+      ndt_map_updater:
+        min_point_count: 5
+        max_eigenvalue_threshold: 0.01
+        min_eigenvalue_ratio: 0.01
+      point_cloud_matcher:
+        solver:
+          max_outer_iteration: 20
+          max_inner_iteration: 50
+          translation_convergence_epsilon: 1.0e-4  # [m]
+          rotation_convergence_epsilon: 1.0e-4  # [rad]
+          outlier_ratio: 0.55
+          ndt_matching_cost_weight: 1.0
+          translation_delta_cost_weight: 10.0
+          rotation_delta_cost_weight: 40.0
+        ransac:
+          enabled: true
+          num_iterations: 12
+          sample_size: 5
+          inlier_threshold: 0.5  # [m]
+          desired_inlier_probability: 0.85
+        correspondence:
+          num_neighbors: 5
+      trajectory_builder_rviz:
+        update_timer_msec: 10

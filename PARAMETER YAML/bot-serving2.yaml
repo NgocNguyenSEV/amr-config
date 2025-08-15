@@ -1,0 +1,25 @@
+/**:
+  ros__parameters:
+    jass_bridge:
+      version: "3.0.0"
+      diagnostic:
+        timeout: 5.0                      # [sec]; time to determine jass is down when state topic has not been subscribed for amount of time
+      motion:
+        linear_epsilon_positive: 0.05     # [m/s]; positive linear velocity under this value will be considered zero
+        linear_epsilon_negative: -0.05    # [m/s]; negative linear velocity under this value will be considered zero
+        angular_epsilon: 0.2              # [rad/s]; angular velocity whose absolute value is under this will be considered zero
+        queue_size: 3                     # size of queue to determine identical motion state
+      patrol:
+        next_waypoint_distance: 0.7       # [m]; distance from waypoint which to plan navigation for next waypoint
+      escort:
+        pause_timeout: 1.0                # [sec]; time to set paused state when target is not updated
+        fail_timeout: 9.0                 # [sec]; time to fail the task when target is not updated
+    jass_bridge_rviz:
+      version: "3.0.0"
+      desired_max_velocity: 1.0         # Desired max velocity of the robot for every navigation task (m/s)
+      move:
+        use_goal_heading: true          # Whether to rotate robot to desired orientation after robot has arrived destination point in move action
+      patrol:
+        repeat: 0                       # Repeat count of patrol action (0: infinite)
+        use_goal_heading: true          # Whether to rotate robot to desired orientation after robot has arrived last destination point in patrol action
+        start_from_nearest: false       # Whether to start patrolling from nearest waypoint or from the first waypoint
